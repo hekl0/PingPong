@@ -1,0 +1,26 @@
+div.upper-left-corner {
+    float: left;
+}
+div.upper-right-corner {
+    float: right;
+}
+div.login{
+position: absolute;
+top: 50%;
+left: 500px;
+/* align-content: center */
+}
+div.sign-up{
+    position: absolute;
+    top: 30%;
+    left: 500px;
+    /* align-content: center */
+    }
+/* div.buttons{
+
+} */
+
+div.links{
+    position: absolute;
+    top: 80%;
+}
