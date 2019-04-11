@@ -1,16 +1,15 @@
 @page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Game";
 }
 
 <div class="d-flex justify-content-center align-middle flex-grow-1 flex-fill">
-    <div id="container"></div>
+    <div id="container" style="position:fixed"></div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
 
 <script src="~/js/utils/constant.js"></script>
-<script src="~/js/scene/WaitingScene.js"></script>
 <script src="~/js/scene/GameScene.js"></script>
 <script src="~/js/game.js"></script>
