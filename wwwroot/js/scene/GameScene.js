@@ -19,7 +19,7 @@ class GameScene extends Phaser.Scene {
         this.ball.setDisplaySize(
             Constant.ORIGNAL_BALL_RADIUS * Constant.MAP_WIDTH / Constant.ORIGINAL_WIDTH,
             Constant.ORIGNAL_BALL_RADIUS * Constant.MAP_HEIGHT / Constant.ORIGINAL_HEIGHT);
-        this.oppBar = this.add.image(300, 800, 'bar');
+        this.oppBar = this.add.image(300, 700, 'bar');
         this.oppBar.setDisplaySize(
             Constant.ORIGINAL_PAD_WIDTH * Constant.MAP_WIDTH / Constant.ORIGINAL_WIDTH, 
             Constant.ORIGINAL_PAD_HEIGHT * Constant.MAP_HEIGHT / Constant.ORIGINAL_HEIGHT);
