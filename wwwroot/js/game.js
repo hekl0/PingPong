@@ -40,19 +40,20 @@ connection.on("ReceiveIndex", (index) => {
 });
 
 connection.on("ReceiveData", () => {
+
 });
 
 let lastKey = 0;
 document.addEventListener('keydown', function(event) {
-    if(event.keyCode == 37 && lastKey == 0) {
+    if(event.keyCode == 37 && lastKey == 0 && playerIndex != 0) {
         //lastKey = event.keyCode;
         console.log('Left was pressed');
-        connection.invoke("movePaddle", 1, -1);
+        connection.invoke("movePaddle", playerIndex, -1);
     }
-    else if(event.keyCode == 39 && lastKey == 0) {
+    else if(event.keyCode == 39 && lastKey == 0 && playerIndex != 0) {
         //lastKey = event.keyCode;
         console.log('Right was pressed');
-        connection.invoke("movePaddle", 1, 1);
+        connection.invoke("movePaddle", playerIndex, 1);
     }
 });
 

@@ -6,8 +6,6 @@ using FinalProject.Models;
 
 namespace FinalProject.Hubs
 {
-    
-
     public class GameHub : Hub
     {
         static int index = 0;
