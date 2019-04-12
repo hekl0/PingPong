@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "/Users/abdullahalsayari/Desktop/Disktop of the disktop/UR STUFF/UR courses/spring 2019/CSC 210/Final Project/UI/UI.csproj",
+  "TargetFramework": "netcoreapp2.2",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "MVC-2.1",
+    "LanguageVersion": "2.1",
+    "Extensions": [
+      {
+        "ExtensionName": "MVC-2.1"
+      }
+    ]
+  }
+}
