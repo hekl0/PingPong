@@ -25,8 +25,10 @@ namespace FinalProject {
                 using (var serviceScope = host.Services.CreateScope ()) {
                     var services = serviceScope.ServiceProvider;
                     try {
+                        GameHub.pong.calculate();
                         var hubContext = services.GetRequiredService<IHubContext<GameHub>> ();
-                        hubContext.Clients.All.SendAsync ("ReceiveData", GameHub.t.x, GameHub.t.y, GameHub.t.p[1].x, GameHub.t.p[2].x);
+                        hubContext.Clients.All.SendAsync ("ReceiveData", GameHub.pong.x, GameHub.pong.y, GameHub.pong.paddle[1].x,
+                        Constants.upperPaddle, GameHub.pong.paddle[2].x, Constants.lowerPaddle);
                     } catch (Exception ex) {
 
                     }
