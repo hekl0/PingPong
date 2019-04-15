@@ -11,7 +11,7 @@ namespace FinalProject.Hubs {
         public static Pong pong = new Pong ();
 
         public async Task SendGameData (Pong pong) {
-            await Clients.All.SendAsync ("ReceiveData", pong.x, pong.y, pong.paddle[1].x, pong.paddle[2].x);
+            await Clients.All.SendAsync ("ReceiveData", pong.x, pong.y, pong.paddle[1].x, Constants.upperPaddle, pong.paddle[2].x, Constants.lowerPaddle);
         }
 
         public override async Task OnConnectedAsync () {
@@ -21,6 +21,7 @@ namespace FinalProject.Hubs {
         }
 
         public async Task movePaddle (int index, int dir) {
+            Console.WriteLine("move", dir);
             pong.paddle[index].x += dir * Constants.paddleSpeed;
             await SendGameData (pong);
         }

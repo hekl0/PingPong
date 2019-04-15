@@ -26,19 +26,11 @@ namespace FinalProject
             Timer timer = new Timer(1000);
             timer.Elapsed += (Object source, System.Timers.ElapsedEventArgs e) =>
             {
-                using (var serviceScope = host.Services.CreateScope())
-                {
-                    var services = serviceScope.ServiceProvider;
                     try
                     {
                         GameHub.pong.calculate();
-                        var hubContext = services.GetRequiredService<IHubContext<GameHub>>();
-                        if (hubContext.Clients.All == null) Console.WriteLine("axx");
-                        Console.WriteLine(GameHub.pong.x);
-                        Console.WriteLine(GameHub.pong.y);
-                        Console.WriteLine(GameHub.pong.paddle[1]);
-                        Console.WriteLine(GameHub.pong.paddle[1].x);
-                        Console.WriteLine(Constants.upperPaddle);
+                        var hubContext = host.Services.CreateScope().ServiceProvider.GetRequiredService<IHubContext<GameHub>>();
+                        hubContext.Clients.All.SendAsync("Test", "gud shit");
                         hubContext.Clients.All
                             .SendAsync("ReceiveData",
                                  GameHub.pong.x, GameHub.pong.y, 
@@ -49,14 +41,14 @@ namespace FinalProject
                     {
                         Console.WriteLine(ex);
                     }
-                }
+                
 
             };
 
             timer.AutoReset = true;
             timer.Enabled = true;
 
-            CreateWebHostBuilder(args).Build().Run();
+            host.Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

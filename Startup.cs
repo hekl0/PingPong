@@ -29,8 +29,8 @@ namespace FinalProject {
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddSignalR ();
             services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_2);
+            services.AddSignalR ();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,11 +46,12 @@ namespace FinalProject {
             app.UseHttpsRedirection ();
             app.UseStaticFiles ();
             app.UseCookiePolicy ();
+
+            app.UseMvc ();
+            
             app.UseSignalR (routes => {
                 routes.MapHub<GameHub> ("/gameHub");
             });
-
-            app.UseMvc ();
         }
     }
 }
