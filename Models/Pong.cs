@@ -12,7 +12,6 @@ namespace FinalProject.Models
             paddle[2] = new Paddle();
         }
 
-
         public void calculate()
         {
             if(paddle[1].occupied == "" || paddle[2].occupied == "") return;

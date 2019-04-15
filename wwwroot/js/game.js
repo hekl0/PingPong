@@ -16,6 +16,9 @@ const connection = new signalR.HubConnectionBuilder()
     .withUrl("/gameHub")
     .build();
 
+    connection.on("Test", function(msg) {
+        console.log(msg);
+    });
 connection.start().then(function () {
     console.log("connected");
 });
