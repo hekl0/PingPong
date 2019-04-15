@@ -3,6 +3,7 @@ namespace FinalProject.Models
 {
     public class Pong
     {
+        public String id;
         public int x = 400, y = 400;
         public Paddle[] paddle = new Paddle[3];
 
