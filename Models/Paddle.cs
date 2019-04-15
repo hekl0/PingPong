@@ -4,9 +4,10 @@ namespace FinalProject.Models
     {
         public int x;
 
-        public bool gotThis(int x)
+
+        public bool gotThis(int pos)
         {
-            if (x <= x + Constants.paddleSize && x >= x) return true;
+            if (pos <= x + Constants.paddleSize && pos >= x) return true;
             else return false;
         }
 

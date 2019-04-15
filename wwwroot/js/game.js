@@ -39,8 +39,10 @@ connection.on("ReceiveIndex", (index) => {
     console.log(index);
 });
 
-connection.on("ReceiveData", () => {
-
+connection.on("ReceiveData", (pongX, pongY, paddle1X, paddle1Y, paddle2X, paddle2Y) => {
+    if (playerIndex == 2) swap(paddle1X, paddle2X);
+    console.log(pongX, pongY, paddle1X, paddle1Y, paddle2X, paddle2Y);
+    game.scene.scenes[0].updateLocation(pongX, pongY, paddle1X, paddle1Y, paddle2X, paddle2Y);
 });
 
 let lastKey = 0;
