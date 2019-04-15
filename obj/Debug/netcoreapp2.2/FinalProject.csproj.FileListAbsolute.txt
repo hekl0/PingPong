@@ -60,3 +60,4 @@ C:/Users/TB/Desktop/class/CSC210/csc-210-final-project-group7/obj/Debug/netcorea
 /home/hekl0/CodeProject/FinalProject/obj/Debug/netcoreapp2.2/FinalProject.RazorTargetAssemblyInfo.cs
 /home/hekl0/CodeProject/FinalProject/obj/Debug/netcoreapp2.2/FinalProject.Views.pdb
 /home/hekl0/CodeProject/FinalProject/obj/Debug/netcoreapp2.2/FinalProject.csproj.CopyComplete
+/home/hekl0/CodeProject/FinalProject/obj/Debug/netcoreapp2.2/Razor/Pages/Test.g.cshtml.cs
