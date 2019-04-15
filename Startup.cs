@@ -15,15 +15,6 @@ using Microsoft.AspNetCore.SignalR;
 namespace FinalProject {
     public class Startup {
 
-        public class CallingSideClass {
-            private readonly IHubContext<GameHub> _hubContext;
-
-            public CallingSideClass (IHubContext<GameHub> hubContext) {
-                _hubContext = hubContext;
-            }
-
-        }
-
         public Startup (IConfiguration configuration) {
             Configuration = configuration;
         }
@@ -39,7 +30,6 @@ namespace FinalProject {
             });
 
             services.AddSignalR ();
-            services.AddScoped<CallingSideClass>();
             services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_2);
         }
 
