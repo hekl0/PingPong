@@ -3,7 +3,7 @@ namespace FinalProject.Models
 {
     public class Pong
     {
-        int x, y;
+        public int x = 400, y = 400;
         public Paddle[] p = new Paddle[3];
 
         public void calculate()
