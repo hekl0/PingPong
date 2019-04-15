@@ -8,16 +8,56 @@ namespace FinalProject.Hubs {
 
     public class GameHub : Hub {
         static int index = 0;
-        public static Pong pong = new Pong ();
+        public static List<Pong> games = new List<Pong> ();
 
-        public override async Task OnConnectedAsync () {
-            index++;
-            await Clients.Caller.SendAsync ("ReceiveIndex", index);
-            await base.OnConnectedAsync ();
+        public async Task AddToGroup (string groupName) {
+            foreach (Pong game in games) {
+                if (game.id == groupName) {
+                    if (game.paddle[1].occupied != "" && game.paddle[2].occupied != "") {
+                        Console.WriteLine ("Room is full muthafuka");
+                        return;
+                    }
+                    if (game.paddle[1].occupied == "") {
+                        game.paddle[1].occupied = Context.ConnectionId;
+                        await Groups.AddToGroupAsync (Context.ConnectionId, groupName);
+                        await Clients.Caller.SendAsync ("ReceiveIndex", 1);
+                    }
+                    if (game.paddle[2].occupied == "") {
+                        game.paddle[2].occupied = Context.ConnectionId;
+                        await Groups.AddToGroupAsync (Context.ConnectionId, groupName);
+                        await Clients.Caller.SendAsync ("ReceiveIndex", 2);
+                    }
+                }
+                break;
+            }
         }
 
-        public async Task movePaddle (int index, int dir) {
-            pong.paddle[index].x += dir * Constants.paddleSpeed;
+        public override async Task OnDisconnectedAsync (Exception exception) {
+            foreach(Pong game in games) {
+                if(game.paddle[1].occupied == Context.ConnectionId) {
+                    await Groups.RemoveFromGroupAsync (Context.ConnectionId,game.id);
+                    break;
+                }
+                if(game.paddle[2].occupied == Context.ConnectionId) {
+                    await Groups.RemoveFromGroupAsync (Context.ConnectionId,game.id);
+                    break;
+                }
+            }
+            await base.OnDisconnectedAsync (exception);
+        }
+
+
+
+        public async Task movePaddle (int index, int dir, string groupID) {
+            Console.WriteLine(Context.ConnectionId);
+            foreach (Pong game in games) {
+                if (game.id == groupID) {
+                    game.paddle[index].x += dir * Constants.paddleSpeed;
+                    await Clients.Group (groupID).SendAsync ("ReceiveData", game);
+                    break;
+                }
+            }
+
         }
     }
 }

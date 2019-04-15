@@ -2,7 +2,9 @@ namespace FinalProject.Models
 {
     public class Paddle
     {
-        public int x;
+        public int x = 200;
+        public string occupied = "";
+
 
 
         public bool gotThis(int pos)

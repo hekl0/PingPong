@@ -39,8 +39,19 @@ connection.on("ReceiveIndex", (index) => {
     console.log(index);
 });
 
-connection.on("ReceiveData", () => {
+connection.on("ReceiveBitch", () => {
+    console.log("dmm");
+});
 
+connection.on("ReceiveData", (pongX, pongY, paddle1X, paddle1Y, paddle2X, paddle2Y) => {
+    if (playerIndex == 2) {
+        let temp = paddle1X;
+        paddle1X = paddle2X;
+        paddle2X = temp;
+    }
+    console.log("dmm");
+    console.log(pongX, pongY, paddle1X, paddle1Y, paddle2X, paddle2Y);
+    game.scene.scenes[0].updateLocation(pongX, pongY, paddle1X, paddle1Y, paddle2X, paddle2Y);
 });
 
 let lastKey = 0;

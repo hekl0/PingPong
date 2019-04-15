@@ -3,12 +3,21 @@ namespace FinalProject.Models
 {
     public class Pong
     {
-        public String id;
+        public string id;
         public int x = 400, y = 400;
         public Paddle[] paddle = new Paddle[3];
 
+        public Pong() {
+            paddle[1] = new Paddle();
+            paddle[2] = new Paddle();
+        }
+
+
         public void calculate()
         {
+            if(paddle[1].occupied == "" || paddle[2].occupied == "") return;
+            x += vx;
+            y += vy;
             if (x <= Constants.pongSize / 2 + 1 || Constants.pongVx >= Constants.mapWidth - (Constants.pongSize / 2 + 1))
             {
                 Constants.pongVx *= -1;
