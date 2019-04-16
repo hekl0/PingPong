@@ -3,6 +3,7 @@ Constant.MAP_WIDTH = window.innerWidth / 1.8;
 
 let playerIndex = 0;
 let groupID = "test";
+let gameEnd = false;
 let config = {
     type: Phaser.AUTO,
     width: Constant.MAP_WIDTH,
@@ -78,12 +79,15 @@ document.addEventListener('keydown', function(event) {
 });
 
 document.addEventListener('keyup', function(event) {
-    if(event.keyCode == 37) { //left arrow
+    if(event.keyCode == 37 || event.keyCode == 65) { //left arrow or a
         console.log('Left was released');
         lastKey = 0;
     }
-    else if(event.keyCode == 39) { //right arrow invoke movePaddle(playerindex, direction(1 or -1));
+    if(event.keyCode == 39 || event.keyCode == 68) { //right arrow or d invoke movePaddle(playerindex, direction(1 or -1));
         console.log('Right was released');
         lastKey = 0;
+    }
+    if (event.keyCode == 32 && gameEnd) { //space pressed
+        game.scene.run('WaitingScene');
     }
 });
