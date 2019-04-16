@@ -1,3 +1,5 @@
+using System;
+
 namespace FinalProject.Models {
     public class Game {
         public int restart = 0;
@@ -12,16 +14,19 @@ namespace FinalProject.Models {
         }
 
         public void calculate () {
+            // Console.WriteLine(paddle[1].occupied);
+            // Console.WriteLine(paddle[2].occupied);
+            // Console.WriteLine(restart);
             if (paddle[1].occupied == "" || paddle[2].occupied == "" || restart < 2) return;
             pongX += Constants.pongVx;
             pongY += Constants.pongVy;
 
             if (pongY > Constants.mapHeight || pongY < 0) {
-                restart = 0;
+                restart = -1;
                 if(pongY > Constants.mapHeight) {
-                    winner = 1;
+                    winner = 2;
                 }
-                else winner = 2;
+                else winner = 1;
             }
 
             if (pongX <= Constants.pongSize / 2 + 1 || pongX >= Constants.mapWidth - (Constants.pongSize / 2 + 1)) {
