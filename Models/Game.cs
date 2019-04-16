@@ -1,6 +1,6 @@
 namespace FinalProject.Models {
     public class Game {
-        public int restart = 2;
+        public int restart = 0;
         public int winner = 0;
         public string id;
         public int pongX = 400, pongY = 400;
