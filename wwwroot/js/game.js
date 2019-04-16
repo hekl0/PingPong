@@ -8,7 +8,7 @@ let config = {
     width: Constant.MAP_WIDTH,
     height: Constant.MAP_HEIGHT,
     parent: 'container',
-    scene: [GameScene]
+    scene: [WaitingScene, GameScene]
 };
 
 let game = new Phaser.Game(config);
@@ -40,6 +40,10 @@ connection.onclose(async () => {
     await start();
 });
 
+connection.on("StartGame", () => {
+    game.scene.run('GameScene');
+});
+
 connection.on("ReceiveIndex", (index) => {
     playerIndex = index;
     console.log(index);
@@ -56,7 +60,7 @@ connection.on("ReceiveData", (pong_game) => {
         pong_game.paddle[2].y = Constant.ORIGINAL_HEIGHT - pong_game.paddle[2].y;
     }
     
-    game.scene.scenes[0].updateLocation(pong_game);
+    game.scene.scenes[1].updateLocation(pong_game);
 });
 
 let lastKey = 0;
