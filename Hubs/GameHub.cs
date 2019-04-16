@@ -36,10 +36,12 @@ namespace FinalProject.Hubs {
             foreach(Game game in games) {
                 if(game.paddle[1].occupied == Context.ConnectionId) {
                     await Groups.RemoveFromGroupAsync (Context.ConnectionId,game.id);
+                    game.paddle[1].occupied = "";
                     break;
                 }
                 if(game.paddle[2].occupied == Context.ConnectionId) {
                     await Groups.RemoveFromGroupAsync (Context.ConnectionId,game.id);
+                    game.paddle[1].occupied = "";
                     break;
                 }
             }
