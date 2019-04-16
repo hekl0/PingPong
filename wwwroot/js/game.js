@@ -22,7 +22,7 @@ connection.on("Test", function(msg) {
 
 connection.start().then(function () {
     console.log("connected");
-    connection.invoke("AddToGroup", "Group_Test");
+    connection.invoke("AddToGroup", "test");
 });
 
 async function start() {
@@ -46,11 +46,10 @@ connection.on("ReceiveIndex", (index) => {
 
 connection.on("ReceiveData", (game) => {
     console.log(game);
-    // if (playerIndex == 2) {
-    //     let temp = paddle1X;
-    //     paddle1X = paddle2X;
-    //     paddle2X = temp;
-    // }
+    if (playerIndex == 2) {
+        game.pongX = Constant.ORIGINAL_WIDTH - game.pongX;
+        game.pongY = Constant.ORIGINAL_HEIGHT - game.pongY;
+    }
     // console.log("dmm");
     // console.log(pongX, pongY, paddle1X, paddle1Y, paddle2X, paddle2Y);
     // game.scene.scenes[0].updateLocation(pongX, pongY, paddle1X, paddle1Y, paddle2X, paddle2Y);

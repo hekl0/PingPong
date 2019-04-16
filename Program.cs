@@ -18,6 +18,9 @@ namespace FinalProject {
 
         public static void Main (string[] args) {
             //hubContext = GlobalHost.ConnectionManager.GetHubContext< GameHub>();
+            Game test = new Game();
+            test.id = "test";
+            GameHub.games.Add(test);
             var host = CreateWebHostBuilder (args).Build ();
             Timer timer = new Timer (1000);
             timer.Elapsed += (Object source, System.Timers.ElapsedEventArgs e) => {
@@ -25,19 +28,18 @@ namespace FinalProject {
                     var services = serviceScope.ServiceProvider;
                     try {
                         var hubContext = services.GetRequiredService<IHubContext<GameHub>> ();
-                        foreach (Pong game in GameHub.games) {
-                            game.calculate ();
+                        foreach (Game game in GameHub.games) {
+                            game.calculate();
                             hubContext.Clients.Group (game.id).SendAsync ("ReceiveData", game);
                         }
                     } catch (Exception ex) {
-
+                        
                     }
 
                 }
-
-                timer.AutoReset = true;
-                timer.Enabled = true;
             };
+            timer.AutoReset = true;
+            timer.Enabled = true;
             host.Run ();
         }
 
