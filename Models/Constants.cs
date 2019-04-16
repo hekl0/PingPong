@@ -6,7 +6,7 @@ namespace FinalProject.Models {
         public static int pongVx = 3;
         public static int pongVy = 1;
         public static int paddleSize = 200;
-        public static int paddleSpeed = 30;
+        public static int paddleSpeed = 12;
         public static int upperPaddle = 50;
         public static int lowerPaddle = 750;
     }

@@ -4,6 +4,8 @@ Constant.MAP_WIDTH = window.innerWidth / 1.8;
 let playerIndex = 0;
 let groupID = "test";
 let gameEnd = false;
+let inGame = false;
+let direction = 0;
 let config = {
     type: Phaser.AUTO,
     width: Constant.MAP_WIDTH,
@@ -42,12 +44,13 @@ connection.onclose(async () => {
 });
 
 connection.on("StartGame", () => {
-    console.log("LOL");
+    inGame = true;
     game.scene.run("GameScene");
 });
 
 connection.on("ReceiveWinner", (winnerIndex) => {
     gameEnd = true;
+    inGame = false;
     if (winnerIndex == playerIndex)
         game.scene.scenes[1].endGame(1);
     else
@@ -79,26 +82,15 @@ connection.on("ReceiveData", (pong_game) => {
 
 let lastKey = 0;
 document.addEventListener('keydown', function(event) {
-    if(event.keyCode == 37 && lastKey == 0 && playerIndex != 0) {
-        //lastKey = event.keyCode;
+    if ((event.keyCode == 37  || event.keyCode == 65) && lastKey == 0 && playerIndex != 0) {
+        lastKey = -1;
         console.log('Left was pressed');
-        connection.invoke("movePaddle", playerIndex, (playerIndex == 1) ? -1 : 1, groupID);
+        direction = (playerIndex == 1) ? -1 : 1;
     }
-    else if(event.keyCode == 39 && lastKey == 0 && playerIndex != 0) {
-        //lastKey = event.keyCode;
+    if ((event.keyCode == 39 || event.keyCode == 68) && lastKey == 0 && playerIndex != 0) {
+        lastKey = 1;
         console.log('Right was pressed');
-        connection.invoke("movePaddle", playerIndex, (playerIndex == 1) ? 1 : -1, groupID);
-    }
-});
-
-document.addEventListener('keyup', function(event) {
-    if(event.keyCode == 37 || event.keyCode == 65) { //left arrow or a
-        console.log('Left was released');
-        lastKey = 0;
-    }
-    if(event.keyCode == 39 || event.keyCode == 68) { //right arrow or d invoke movePaddle(playerindex, direction(1 or -1));
-        console.log('Right was released');
-        lastKey = 0;
+        direction = (playerIndex == 1) ? 1 : -1;
     }
     if (event.keyCode == 32 && gameEnd) { //space pressed
         game.scene.stop('GameScene');
@@ -107,3 +99,21 @@ document.addEventListener('keyup', function(event) {
         gameEnd = false;
     }
 });
+
+document.addEventListener('keyup', function(event) {
+    if(event.keyCode == 37 || event.keyCode == 65) { //left arrow or a
+        console.log('Left was released');
+        lastKey = 0;
+        direction = 0;
+    }
+    if(event.keyCode == 39 || event.keyCode == 68) { //right arrow or d invoke movePaddle(playerindex, direction(1 or -1));
+        console.log('Right was released');
+        lastKey = 0;
+        direction = 0;
+    }
+});
+
+setInterval(function() {
+    if (!inGame) return;
+    connection.invoke("movePaddle", playerIndex, direction, groupID);
+}, 20);
