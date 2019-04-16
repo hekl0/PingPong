@@ -26,19 +26,19 @@ namespace FinalProject.Hubs {
                         await Clients.Caller.SendAsync ("ReceiveIndex", 2);
                     }
                     break;
-                }    
+                }
             }
         }
 
         public override async Task OnDisconnectedAsync (Exception exception) {
-            foreach(Game game in games) {
-                if(game.paddle[1].occupied == Context.ConnectionId) {
-                    await Groups.RemoveFromGroupAsync (Context.ConnectionId,game.id);
+            foreach (Game game in games) {
+                if (game.paddle[1].occupied == Context.ConnectionId) {
+                    await Groups.RemoveFromGroupAsync (Context.ConnectionId, game.id);
                     game.paddle[1].occupied = "";
                     break;
                 }
-                if(game.paddle[2].occupied == Context.ConnectionId) {
-                    await Groups.RemoveFromGroupAsync (Context.ConnectionId,game.id);
+                if (game.paddle[2].occupied == Context.ConnectionId) {
+                    await Groups.RemoveFromGroupAsync (Context.ConnectionId, game.id);
                     game.paddle[2].occupied = "";
                     break;
                 }
@@ -46,18 +46,24 @@ namespace FinalProject.Hubs {
             await base.OnDisconnectedAsync (exception);
         }
 
-
-
         public async Task movePaddle (int index, int dir, string groupID) {
-            Console.WriteLine(Context.ConnectionId);
             foreach (Game game in games) {
                 if (game.id == groupID) {
                     game.paddle[index].x += dir * Constants.paddleSpeed;
-                    await Clients.Group (groupID).SendAsync ("ReceiveData", game);
+                    if (game.paddle[index].x < Constants.paddleSize / 2 + 1) game.paddle[index].x = Constants.paddleSize / 2 + 1;
+                    if (game.paddle[index].x > Constants.mapWidth - Constants.paddleSize / 2 - 1) game.paddle[index].x = Constants.mapWidth - Constants.paddleSize / 2 - 1;
                     break;
                 }
             }
+        }
 
+        public async Task restartGame (string groupID) {
+            foreach (Game game in games) {
+                if (game.id == groupID) {
+                    game.restart++;
+                    break;
+                }
+            }
         }
     }
 }
