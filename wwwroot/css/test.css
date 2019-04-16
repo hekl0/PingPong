@@ -1,0 +1,31 @@
+.left-img {
+  width: 30vw;
+  height: 95vh;
+  display: inline-block;
+  border-radius: 30px 0px 0px 30px;
+}
+
+.right-img {
+  width: 30vw;
+  height: 95vh;
+  display: inline-block;
+  border-radius: 0px 30px 30px 0px;
+}
+
+#theme-kitchen {
+  background: url(../../assets/kitchen/background.png);
+  position: relative;
+  background-size: cover;
+}
+
+#theme-space {
+  background: url(../../assets/space/background.png);
+  position: relative;
+  background-size: cover;
+}
+
+.choosed {
+  border-width: 5px;
+  border-style: solid;
+  border-color: white;
+}
