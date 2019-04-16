@@ -61,6 +61,7 @@ namespace FinalProject.Hubs {
             foreach (Game game in games) {
                 if (game.id == groupID) {
                     game.restart++;
+                    if(restart==2) hubContext.Clients.Group (game.id).SendAsync ("StartGame");
                     break;
                 }
             }
