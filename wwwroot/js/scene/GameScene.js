@@ -29,16 +29,16 @@ class GameScene extends Phaser.Scene {
             Constant.ORIGINAL_PAD_HEIGHT * Constant.MAP_HEIGHT / Constant.ORIGINAL_HEIGHT);
     }
 
-    updateLocation(ballLocationX, ballLocationY, oppBarLocationX, oppBarLocationY, userBarLocationX, userBarLocationY) {
+    updateLocation(game) {
         this.ball.setPosition(
-            ballLocationX * Constant.MAP_WIDTH / Constant.ORIGINAL_WIDTH, 
-            ballLocationY * Constant.MAP_HEIGHT / Constant.ORIGINAL_HEIGHT);
+            game.pongX * Constant.MAP_WIDTH / Constant.ORIGINAL_WIDTH, 
+            game.pongY * Constant.MAP_HEIGHT / Constant.ORIGINAL_HEIGHT);
         this.oppBar.setPosition(
-            oppBarLocationX * Constant.MAP_WIDTH / Constant.ORIGINAL_WIDTH, 
-            oppBarLocationY * Constant.MAP_HEIGHT / Constant.ORIGINAL_HEIGHT);
+            game.paddle[1].x * Constant.MAP_WIDTH / Constant.ORIGINAL_WIDTH, 
+            game.paddle[1].y * Constant.MAP_HEIGHT / Constant.ORIGINAL_HEIGHT);
         this.userBar.setPosition(
-            userBarLocationX * Constant.MAP_WIDTH / Constant.ORIGINAL_WIDTH, 
-            userBarLocationY * Constant.MAP_HEIGHT / Constant.ORIGINAL_HEIGHT);
+            game.paddle[2].x * Constant.MAP_WIDTH / Constant.ORIGINAL_WIDTH, 
+            game.paddle[2].y * Constant.MAP_HEIGHT / Constant.ORIGINAL_HEIGHT);
     }
 }
 

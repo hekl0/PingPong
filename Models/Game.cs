@@ -8,8 +8,8 @@ namespace FinalProject.Models
         public Paddle[] paddle = new Paddle[3];
 
         public Game() {
-            paddle[1] = new Paddle();
-            paddle[2] = new Paddle();
+            paddle[1] = new Paddle(1);
+            paddle[2] = new Paddle(0);
         }
 
         public void calculate()
