@@ -13,10 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace FinalProject
-{
-    public class Program
-    {
+namespace FinalProject {
+    public class Program {
 
         public static void Main (string[] args) {
             //hubContext = GlobalHost.ConnectionManager.GetHubContext< GameHub>();
@@ -28,24 +26,24 @@ namespace FinalProject
                     try {
                         var hubContext = services.GetRequiredService<IHubContext<GameHub>> ();
                         foreach (Pong game in GameHub.games) {
-                            game.calculate();
+                            game.calculate ();
                             hubContext.Clients.Group (game.id).SendAsync ("ReceiveData", game);
                         }
                     } catch (Exception ex) {
 
                     }
-                
 
+                }
+
+                timer.AutoReset = true;
+                timer.Enabled = true;
             };
-
-            timer.AutoReset = true;
-            timer.Enabled = true;
-
             host.Run ();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-            .UseStartup<Startup>();
+        public static IWebHostBuilder CreateWebHostBuilder (string[] args) =>
+            WebHost.CreateDefaultBuilder (args)
+            .UseStartup<Startup> ();
+
     }
 }
