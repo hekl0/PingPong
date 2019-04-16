@@ -42,6 +42,7 @@ connection.onclose(async () => {
 });
 
 connection.on("StartGame", () => {
+    console.log("LOL");
     game.scene.run("GameScene");
 });
 
@@ -100,8 +101,9 @@ document.addEventListener('keyup', function(event) {
         lastKey = 0;
     }
     if (event.keyCode == 32 && gameEnd) { //space pressed
+        game.scene.stop('GameScene');
         game.scene.run('WaitingScene');
-        connection.invoke("restartGame");
+        connection.invoke("restartGame", groupID);
         gameEnd = false;
     }
 });

@@ -14,9 +14,10 @@ namespace FinalProject.Hubs {
             foreach (Game game in games) {
                 if (game.id == groupName) {
                     if (game.paddle[1].occupied != "" && game.paddle[2].occupied != "") {
-                        Console.WriteLine ("Room is full muthafuka");
+                        Console.WriteLine ("Room is full");
                         return;
-                    } else if (game.paddle[1].occupied == "") {
+                    }  
+                    if (game.paddle[1].occupied == "") {
                         game.paddle[1].occupied = Context.ConnectionId;
                         await Groups.AddToGroupAsync (Context.ConnectionId, groupName);
                         await Clients.Caller.SendAsync ("ReceiveIndex", 1);
@@ -24,6 +25,11 @@ namespace FinalProject.Hubs {
                         game.paddle[2].occupied = Context.ConnectionId;
                         await Groups.AddToGroupAsync (Context.ConnectionId, groupName);
                         await Clients.Caller.SendAsync ("ReceiveIndex", 2);
+                    }
+                    game.restart++;
+                    if(game.restart==2) {
+                        await Task.Delay(1000);
+                        await Clients.Group (game.id).SendAsync ("StartGame");
                     }
                     break;
                 }
@@ -60,8 +66,21 @@ namespace FinalProject.Hubs {
         public async Task restartGame (string groupID) {
             foreach (Game game in games) {
                 if (game.id == groupID) {
+                    if (game.paddle[1].occupied == "") {
+                        game.paddle[1].occupied = Context.ConnectionId;
+                        await Groups.AddToGroupAsync (Context.ConnectionId, groupID);
+                        await Clients.Caller.SendAsync ("ReceiveIndex", 1);
+                    } else if (game.paddle[2].occupied == "") {
+                        game.paddle[2].occupied = Context.ConnectionId;
+                        await Groups.AddToGroupAsync (Context.ConnectionId, groupID);
+                        await Clients.Caller.SendAsync ("ReceiveIndex", 2);
+                    }
+
                     game.restart++;
-                    if(game.restart==2) Clients.Group (game.id).SendAsync ("StartGame");
+                    if(game.restart==2) {
+                        await Task.Delay(1000);
+                        await Clients.Group (game.id).SendAsync ("StartGame");
+                    }
                     break;
                 }
             }

@@ -30,9 +30,12 @@ namespace FinalProject {
                         var hubContext = services.GetRequiredService<IHubContext<GameHub>> ();
                         foreach (Game game in GameHub.games) {
                             game.calculate ();
-                            if (game.restart == 0)
+                            if (game.restart == -1) {
                                 hubContext.Clients.Group (game.id).SendAsync ("ReceiveWinner", game.winner);
-                            else
+                                game.restart = 0;
+                                game.reset();
+                            }
+                            if (game.restart == 2)
                                 hubContext.Clients.Group (game.id).SendAsync ("ReceiveData", game);
                         }
                     } catch (Exception ex) {
