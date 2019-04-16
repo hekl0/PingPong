@@ -18,28 +18,21 @@ namespace FinalProject
     public class Program
     {
 
-        public static void Main(string[] args)
-        {
-            List<Pong> games = new List<Pong>();
+        public static void Main (string[] args) {
             //hubContext = GlobalHost.ConnectionManager.GetHubContext< GameHub>();
-            var host = CreateWebHostBuilder(args).Build();
-            Timer timer = new Timer(1000);
-            timer.Elapsed += (Object source, System.Timers.ElapsedEventArgs e) =>
-            {
-                    try
-                    {
-                        GameHub.pong.calculate();
-                        var hubContext = host.Services.CreateScope().ServiceProvider.GetRequiredService<IHubContext<GameHub>>();
-                        hubContext.Clients.All.SendAsync("Test", "gud shit");
-                        hubContext.Clients.All
-                            .SendAsync("ReceiveData",
-                                 GameHub.pong.x, GameHub.pong.y, 
-                                 GameHub.pong.paddle[1].x, Constants.upperPaddle, 
-                                 GameHub.pong.paddle[2].x, Constants.lowerPaddle);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex);
+            var host = CreateWebHostBuilder (args).Build ();
+            Timer timer = new Timer (1000);
+            timer.Elapsed += (Object source, System.Timers.ElapsedEventArgs e) => {
+                using (var serviceScope = host.Services.CreateScope ()) {
+                    var services = serviceScope.ServiceProvider;
+                    try {
+                        var hubContext = services.GetRequiredService<IHubContext<GameHub>> ();
+                        foreach (Pong game in GameHub.games) {
+                            game.calculate();
+                            hubContext.Clients.Group (game.id).SendAsync ("ReceiveData", game);
+                        }
+                    } catch (Exception ex) {
+
                     }
                 
 
@@ -48,7 +41,7 @@ namespace FinalProject
             timer.AutoReset = true;
             timer.Enabled = true;
 
-            host.Run();
+            host.Run ();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

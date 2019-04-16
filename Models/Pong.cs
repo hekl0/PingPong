@@ -3,6 +3,7 @@ namespace FinalProject.Models
 {
     public class Pong
     {
+        public string id;
         public int x = 400, y = 400;
         public Paddle[] paddle = new Paddle[3];
 
@@ -13,6 +14,9 @@ namespace FinalProject.Models
 
         public void calculate()
         {
+            if(paddle[1].occupied == "" || paddle[2].occupied == "") return;
+            x += vx;
+            y += vy;
             if (x <= Constants.pongSize / 2 + 1 || Constants.pongVx >= Constants.mapWidth - (Constants.pongSize / 2 + 1))
             {
                 Constants.pongVx *= -1;
