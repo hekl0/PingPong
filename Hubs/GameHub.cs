@@ -27,8 +27,8 @@ namespace FinalProject.Hubs {
                         await Groups.AddToGroupAsync (Context.ConnectionId, groupName);
                         await Clients.Caller.SendAsync ("ReceiveIndex", 2);
                     }
+                    break;
                 }
-                break;
             }
         }
 

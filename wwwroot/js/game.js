@@ -16,11 +16,13 @@ const connection = new signalR.HubConnectionBuilder()
     .withUrl("/gameHub")
     .build();
 
-    connection.on("Test", function(msg) {
-        console.log(msg);
-    });
+connection.on("Test", function(msg) {
+       console.log(msg);
+});
+
 connection.start().then(function () {
     console.log("connected");
+    connection.invoke("AddToGroup", "Group_Test");
 });
 
 async function start() {
@@ -42,19 +44,16 @@ connection.on("ReceiveIndex", (index) => {
     console.log(index);
 });
 
-connection.on("ReceiveBitch", () => {
-    console.log("dmm");
-});
-
-connection.on("ReceiveData", (pongX, pongY, paddle1X, paddle1Y, paddle2X, paddle2Y) => {
-    if (playerIndex == 2) {
-        let temp = paddle1X;
-        paddle1X = paddle2X;
-        paddle2X = temp;
-    }
-    console.log("dmm");
-    console.log(pongX, pongY, paddle1X, paddle1Y, paddle2X, paddle2Y);
-    game.scene.scenes[0].updateLocation(pongX, pongY, paddle1X, paddle1Y, paddle2X, paddle2Y);
+connection.on("ReceiveData", (game) => {
+    console.log(game);
+    // if (playerIndex == 2) {
+    //     let temp = paddle1X;
+    //     paddle1X = paddle2X;
+    //     paddle2X = temp;
+    // }
+    // console.log("dmm");
+    // console.log(pongX, pongY, paddle1X, paddle1Y, paddle2X, paddle2Y);
+    // game.scene.scenes[0].updateLocation(pongX, pongY, paddle1X, paddle1Y, paddle2X, paddle2Y);
 });
 
 let lastKey = 0;

@@ -15,8 +15,8 @@ namespace FinalProject.Models
         public void calculate()
         {
             if(paddle[1].occupied == "" || paddle[2].occupied == "") return;
-            x += vx;
-            y += vy;
+            x += Constants.pongVx;
+            y += Constants.pongVy;
             if (x <= Constants.pongSize / 2 + 1 || Constants.pongVx >= Constants.mapWidth - (Constants.pongSize / 2 + 1))
             {
                 Constants.pongVx *= -1;
