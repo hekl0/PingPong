@@ -42,6 +42,18 @@ connection.onclose(async () => {
 });
 
 connection.on("StartGame", () => {
+    game.scene.run("GameScene");
+});
+
+connection.on("ReceiveWinner", (winnerIndex) => {
+    gameEnd = true;
+    if (winnerIndex == playerIndex)
+        game.scene.scenes[1].endGame(1);
+    else
+        game.scene.scenes[1].endGame(2);
+});
+
+connection.on("StartGame", () => {
     game.scene.run('GameScene');
 });
 
@@ -89,5 +101,7 @@ document.addEventListener('keyup', function(event) {
     }
     if (event.keyCode == 32 && gameEnd) { //space pressed
         game.scene.run('WaitingScene');
+        connection.invoke("restartGame");
+        gameEnd = false;
     }
 });
