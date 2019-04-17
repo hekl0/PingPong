@@ -26,8 +26,8 @@ namespace FinalProject.Hubs {
                         await Groups.AddToGroupAsync (Context.ConnectionId, groupName);
                         await Clients.Caller.SendAsync ("ReceiveIndex", 2);
                     }
-                    game.restart++;
-                    if(game.restart==2) {
+                    game.numplayer++;
+                    if(game.numplayer==2) {
                         await Task.Delay(1000);
                         await Clients.Group (game.id).SendAsync ("StartGame");
                     }
@@ -40,12 +40,12 @@ namespace FinalProject.Hubs {
             foreach (Game game in games) {
                 if (game.paddle[1].occupied == Context.ConnectionId) {
                     await Groups.RemoveFromGroupAsync (Context.ConnectionId, game.id);
-                    game.paddle[1].occupied = "";
+                    game.paddle[1].occupied = "afk";
                     break;
                 }
                 if (game.paddle[2].occupied == Context.ConnectionId) {
                     await Groups.RemoveFromGroupAsync (Context.ConnectionId, game.id);
-                    game.paddle[2].occupied = "";
+                    game.paddle[2].occupied = "afk";
                     break;
                 }
             }
@@ -76,8 +76,8 @@ namespace FinalProject.Hubs {
                         await Clients.Caller.SendAsync ("ReceiveIndex", 2);
                     }
 
-                    game.restart++;
-                    if(game.restart==2) {
+                    game.numplayer++;
+                    if(game.numplayer==2) {
                         await Task.Delay(1000);
                         await Clients.Group (game.id).SendAsync ("StartGame");
                     }
