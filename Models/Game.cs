@@ -36,13 +36,13 @@ namespace FinalProject.Models {
                 Constants.pongVx *= -1;
             }
 
-            if (pongY > Constants.upperPaddle + Constants.paddleHeight - 5 && pongY < Constants.upperPaddle + Constants.paddleHeight + Constants.pongSize / 2 - 10) {
+            if (pongY > Constants.upperPaddle + Constants.paddleHeight && pongY < Constants.upperPaddle + Constants.paddleHeight + Constants.pongSize / 2 - 10) {
                 if (paddle[2].gotThis (pongX)) {
                     Constants.pongVy *= -1;
                 }
             }
 
-            if (pongY > Constants.lowerPaddle - Constants.paddleHeight - (Constants.pongSize / 2 + 1) + 10 && pongY < Constants.lowerPaddle - Constants.paddleHeight + 5) {
+            if (pongY > Constants.lowerPaddle - Constants.paddleHeight - (Constants.pongSize / 2 + 1) + 10 && pongY < Constants.lowerPaddle - Constants.paddleHeight) {
                 if (paddle[1].gotThis (pongX)) {
                     Constants.pongVy *= -1;
                 }

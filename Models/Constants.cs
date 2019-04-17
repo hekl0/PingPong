@@ -4,7 +4,7 @@ namespace FinalProject.Models {
         public static int mapHeight = 800;
         public static int pongSize = 40;
         public static int pongVx = 3;
-        public static int pongVy = 1;
+        public static int pongVy = 3;
         public static int paddleSize = 200;
         public static int paddleHeight = 20;
         public static int paddleSpeed = 12;

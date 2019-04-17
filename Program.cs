@@ -37,10 +37,11 @@ namespace FinalProject {
                             }
                             if (game.numplayer == 2) {
                                 hubContext.Clients.Group (game.id).SendAsync ("ReceiveData", game);
-                                game.time = (game.time +1)%2000;
+                                game.time = (game.time +1)%250;
                                 if(game.time == 0) {
-                                    if(Constants.pongVy < 0) Constants.pongVy--;
-                                    else Constants.pongVy++;
+                                    
+                                    if(Constants.pongVy < 0) Constants.pongVy-=1;
+                                    else Constants.pongVy+=1;
                                 }
                             }
                         }
