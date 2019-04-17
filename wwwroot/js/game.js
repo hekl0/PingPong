@@ -67,7 +67,6 @@ connection.on("ReceiveIndex", (index) => {
 });
 
 connection.on("ReceiveData", (pong_game) => {
-    console.log(pong_game);
     if (playerIndex == 2) {
         pong_game.pongX = Constant.ORIGINAL_WIDTH - pong_game.pongX;
         pong_game.pongY = Constant.ORIGINAL_HEIGHT - pong_game.pongY;
@@ -80,17 +79,18 @@ connection.on("ReceiveData", (pong_game) => {
     game.scene.scenes[1].updateLocation(pong_game);
 });
 
-let lastKey = 0;
+let leftPressed = false;
+let rightPressed = false;
 document.addEventListener('keydown', function(event) {
-    if ((event.keyCode == 37  || event.keyCode == 65) && lastKey == 0 && playerIndex != 0) {
-        lastKey = -1;
+    if ((event.keyCode == 37  || event.keyCode == 65) && !leftPressed && inGame) {
         console.log('Left was pressed');
-        direction = (playerIndex == 1) ? -1 : 1;
+        leftPressed = true;
+        direction += (playerIndex == 1) ? -1 : 1;
     }
-    if ((event.keyCode == 39 || event.keyCode == 68) && lastKey == 0 && playerIndex != 0) {
-        lastKey = 1;
+    if ((event.keyCode == 39 || event.keyCode == 68) && !rightPressed && inGame) {
         console.log('Right was pressed');
-        direction = (playerIndex == 1) ? 1 : -1;
+        rightPressed = true;
+        direction += (playerIndex == 1) ? 1 : -1;
     }
     if (event.keyCode == 32 && gameEnd) { //space pressed
         game.scene.stop('GameScene');
@@ -103,13 +103,13 @@ document.addEventListener('keydown', function(event) {
 document.addEventListener('keyup', function(event) {
     if(event.keyCode == 37 || event.keyCode == 65) { //left arrow or a
         console.log('Left was released');
-        lastKey = 0;
-        direction = 0;
+        leftPressed = false;
+        direction -= (playerIndex == 1) ? -1 : 1;
     }
     if(event.keyCode == 39 || event.keyCode == 68) { //right arrow or d invoke movePaddle(playerindex, direction(1 or -1));
         console.log('Right was released');
-        lastKey = 0;
-        direction = 0;
+        rightPressed = false;
+        direction -= (playerIndex == 1) ? 1 : -1;
     }
 });
 
