@@ -17,15 +17,16 @@ namespace FinalProject.Hubs {
                         Console.WriteLine ("Room is full");
                         return;
                     }  
-                    if (game.paddle[1].occupied == "") {
+                    if (game.paddle[1].occupied == "" && game.paddle[2].occupied != Context.ConnectionId) {
                         game.paddle[1].occupied = Context.ConnectionId;
                         await Groups.AddToGroupAsync (Context.ConnectionId, groupName);
                         await Clients.Caller.SendAsync ("ReceiveIndex", 1);
-                    } else if (game.paddle[2].occupied == "") {
+                    } else if (game.paddle[2].occupied == "" && game.paddle[1].occupied != Context.ConnectionId) {
                         game.paddle[2].occupied = Context.ConnectionId;
                         await Groups.AddToGroupAsync (Context.ConnectionId, groupName);
                         await Clients.Caller.SendAsync ("ReceiveIndex", 2);
                     }
+                    else break;
                     game.numplayer++;
                     if(game.numplayer==2) {
                         await Task.Delay(1000);

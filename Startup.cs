@@ -30,7 +30,7 @@ namespace FinalProject {
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            services.AddDbContext<GamerDbContext>(opt => opt.UseInMemoryDatabase("TodoList"));
+            // services.AddDbContext<GamerDbContext>(opt => opt.UseInMemoryDatabase("TodoList"));
 
             services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_2);
             services.AddSignalR ();

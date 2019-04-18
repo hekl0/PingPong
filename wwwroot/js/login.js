@@ -6,36 +6,40 @@ document.getElementById("join").addEventListener("click", function (event) {
     var xhr = new XMLHttpRequest();
     xhr.addEventListener("readystatechange", function () {
         if (this.readyState === 4) {
-            console.log(this.responseText);
-            data = JSON.parse(this.response);
-            if (data.piles.pile == 0) {
-                console.log("has not lost");
-            }
-            else {
-                console.log("has lost!!");
+            if (this.status == 400)
+                alert(this.responseText);
+            if (this.status == 200) {
+                console.log("Ok");
+                //move to next screen
+                var newPage = window.open("/game", "_self");
+                newPage.groupID = room;
             }
         }
     });
-    xhr.open("GET", "test/gamer/" + room);
-    xhr.send(data);
+    xhr.open("GET", "api/room/" + room + "/join");
+    xhr.send(data); 
 });
 
 document.getElementById("create").addEventListener("click", function (event) {
     // var data = null;
     console.log("create")
+    var room = document.getElementById("room").value;
     var xhr = new XMLHttpRequest();
     xhr.addEventListener("readystatechange", function () {
         if (this.readyState === 4) {
-            console.log(this.responseText);
-            data = JSON.parse(this.response);
-            if (data.piles.pile == 0) {
-                console.log("has not lost");
-            }
-            else {
-                console.log("has lost!!");
+            if (this.readyState === 4) {
+                if (this.status == 400)
+                    alert(this.responseText);
+                if (this.status == 200) {
+                    console.log("Ok");
+                    //move to next screen
+                    // $(location).attr('href', '/game');
+                    var newPage = window.open("/game", "_self");
+                    newPage.groupID = room;
+                }
             }
         }
     });
-    xhr.open("POST", "api/Gamer/" + room);
+    xhr.open("GET", "api/room/" + room + "/create");
     xhr.send();
 });
