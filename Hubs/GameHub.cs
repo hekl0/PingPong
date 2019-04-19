@@ -13,6 +13,8 @@ namespace FinalProject.Hubs {
         public async Task AddToGroup (string groupName) {
             foreach (Game game in games) {
                 if (game.id == groupName) {
+                    Console.WriteLine(game.paddle[1].occupied);
+                    Console.WriteLine(game.paddle[2].occupied);
                     if (game.paddle[1].occupied != "" && game.paddle[2].occupied != "") {
                         Console.WriteLine ("Room is full");
                         return;
@@ -28,9 +30,11 @@ namespace FinalProject.Hubs {
                     }
                     else break;
                     game.numplayer++;
-                    if(game.numplayer==2) {
+                    if(game.paddle[1].occupied != "" && game.paddle[2].occupied != "") {
                         await Task.Delay(1000);
-                        await Clients.Group (game.id).SendAsync ("StartGame");
+                        await Clients.Group(game.id).SendAsync ("StartGame");
+                        game.inGame = true;
+                        game.gameOver = false;
                     }
                     break;
                 }
@@ -41,19 +45,21 @@ namespace FinalProject.Hubs {
             foreach (Game game in games) {
                 if (game.paddle[1].occupied == Context.ConnectionId) {
                     await Groups.RemoveFromGroupAsync (Context.ConnectionId, game.id);
-                    game.paddle[1].occupied = "afk";
+                    game.paddle[1].occupied = "";
+                    game.numplayer--;
                     break;
                 }
                 if (game.paddle[2].occupied == Context.ConnectionId) {
                     await Groups.RemoveFromGroupAsync (Context.ConnectionId, game.id);
-                    game.paddle[2].occupied = "afk";
+                    game.paddle[2].occupied = "";
+                    game.numplayer--;
                     break;
                 }
             }
             await base.OnDisconnectedAsync (exception);
         }
 
-        public async Task movePaddle (int index, int dir, string groupID) {
+        public async Task movePaddle(int index, int dir, string groupID) {
             foreach (Game game in games) {
                 if (game.id == groupID) {
                     game.paddle[index].x += dir * Constants.paddleSpeed;
@@ -77,10 +83,11 @@ namespace FinalProject.Hubs {
                         await Clients.Caller.SendAsync ("ReceiveIndex", 2);
                     }
 
-                    game.numplayer++;
-                    if(game.numplayer==2) {
+                    if(game.paddle[1].occupied != "" && game.paddle[2].occupied != "") {
                         await Task.Delay(1000);
-                        await Clients.Group (game.id).SendAsync ("StartGame");
+                        await Clients.Group(game.id).SendAsync("StartGame");
+                        game.inGame = true;
+                        game.gameOver = false;
                     }
                     break;
                 }

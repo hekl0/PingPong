@@ -26,8 +26,11 @@ namespace FinalProject.Controllers {
         public ActionResult JoinRoom(string room)
         {
             foreach (Game game in GameHub.games)
-                if (game.id == room)
+                if (game.id == room) { 
+                    if (game.numplayer == 2) return BadRequest("Room is full");
+                    if (game.inGame) return BadRequest("Room is in game");
                     return Ok();
+                }
 
             return BadRequest("Room doesn't exist");
         }

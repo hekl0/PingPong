@@ -1,20 +1,13 @@
 namespace FinalProject.Models {
-    public class Paddle {
+    public class Paddle : Entity {
+        public string occupied;
+        public Paddle (int x, int y) {
+            this.x = x;
+            this.y = y;
+            this.width = Constants.paddleSize;
+            this.height = Constants.paddleHeight;
 
-        public int x = 240;
-        public int y;
-        public string occupied = "";
-
-
-        public Paddle (int up) {
-            if (up == 1) y = Constants.lowerPaddle;
-            else y = Constants.upperPaddle;
+            this.occupied = "";
         }
-
-        public bool gotThis (int pos) {
-            if (pos <= x + Constants.paddleSize/2 + 1 && pos >= x - Constants.paddleSize/2 - 1) return true;
-            else return false;
-        }
-
     }
 }

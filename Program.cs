@@ -28,27 +28,25 @@ namespace FinalProject {
                     var services = serviceScope.ServiceProvider;
                     try {
                         var hubContext = services.GetRequiredService<IHubContext<GameHub>> ();
-                        foreach (Game game in GameHub.games) {
-                            game.calculate ();
-                            if (game.numplayer == -1) {
-                                hubContext.Clients.Group (game.id).SendAsync ("ReceiveWinner", game.winner);
-                                game.numplayer = 0;
-                                game.reset();
-                            }
-                            if (game.numplayer == 2) {
-                                hubContext.Clients.Group (game.id).SendAsync ("ReceiveData", game);
-                                game.time = (game.time +1)%250;
-                                if(game.time == 0) {
-                                    
-                                    if(Constants.pongVy < 0) Constants.pongVy-=1;
-                                    else Constants.pongVy+=1;
+                        foreach (Game game in GameHub.games) 
+                            if (game.inGame) {
+                                game.calculate();
+                                if (game.gameOver) {
+                                    game.inGame = false;
+                                    hubContext.Clients.Group(game.id).SendAsync("ReceiveWinner", game.winner);
+                                    game.reset();
+                                    break;
                                 }
+                                hubContext.Clients.Group(game.id).SendAsync("ReceiveData", game);
+
+                                //increase v of ball after time
+                                game.time = (game.time +1) % 100;
+                                if(game.time == 0) 
+                                    game.pong.speedUp();
                             }
-                        }
                     } catch (Exception ex) {
-
+                        Console.WriteLine(ex);
                     }
-
                 }
             };
             timer.AutoReset = true;
