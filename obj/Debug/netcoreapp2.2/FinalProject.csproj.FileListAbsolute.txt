@@ -30,3 +30,4 @@
 /home/hekl0/CodeProject/FinalProject/obj/Debug/netcoreapp2.2/FinalProject.dll
 /home/hekl0/CodeProject/FinalProject/obj/Debug/netcoreapp2.2/FinalProject.pdb
 /home/hekl0/CodeProject/FinalProject/obj/Debug/netcoreapp2.2/FinalProject.csproj.CopyComplete
+/home/hekl0/CodeProject/FinalProject/obj/Debug/netcoreapp2.2/Razor/Pages/Login.g.cshtml.cs
