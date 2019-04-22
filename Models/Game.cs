@@ -1,59 +1,50 @@
 using System;
 
-namespace FinalProject.Models {
-    public class Game {
-        public int numplayer = 0;
-        public int winner = 0;
+namespace FinalProject.Models
+{
+    public class Game
+    {
+        public int numplayer, time;
+        public int winner;
         public string id;
-        public int pongX = 400, pongY = 400;
-        public int time = 0;
+        public Pong pong;
         public Paddle[] paddle = new Paddle[3];
+        public bool inGame, gameOver;
 
-        public Game () {
-            paddle[1] = new Paddle (1);
-            paddle[2] = new Paddle (0);
+        public Game()
+        {
+            numplayer = 0;
+            inGame = false;
+            gameOver = false;
+            reset();
         }
 
-        public void calculate () {
-            // Console.WriteLine(paddle[1].occupied);
-            // Console.WriteLine(paddle[2].occupied);
-            // Console.WriteLine(restart);
-            if (paddle[1].occupied == "" || paddle[2].occupied == "" || numplayer < 2) return;
-            pongX += Constants.pongVx;
-            pongY += Constants.pongVy;
+        public void calculate()
+        {
+            pong.move();
 
-            if (pongY > Constants.mapHeight || pongY < 0) {
-                numplayer = -1;
-                if(paddle[1].occupied == "afk") paddle[1].occupied = "";
-                if(paddle[2].occupied == "afk") paddle[2].occupied = "";
-                if(pongY > Constants.mapHeight) {
-                    winner = 2;
-                }
+            if (pong.y > Constants.mapHeight || pong.y < 0)
+            {
+                gameOver = true;
+                if (pong.y > Constants.mapHeight) winner = 2;
                 else winner = 1;
             }
 
-            if (pongX <= Constants.pongSize / 2 + 1 || pongX >= Constants.mapWidth - (Constants.pongSize / 2 + 1)) {
-                Constants.pongVx *= -1;
+            if (pong.x - pong.width <= 0 || pong.x + pong.width >= Constants.mapWidth)
+            {
+                pong.vx *= -1;
             }
 
-            if (pongY > Constants.upperPaddle + Constants.paddleHeight && pongY < Constants.upperPaddle + Constants.paddleHeight + Constants.pongSize / 2 - 10) {
-                if (paddle[2].gotThis (pongX)) {
-                    Constants.pongVy *= -1;
-                }
-            }
-
-            if (pongY > Constants.lowerPaddle - Constants.paddleHeight - (Constants.pongSize / 2 + 1) + 10 && pongY < Constants.lowerPaddle - Constants.paddleHeight) {
-                if (paddle[1].gotThis (pongX)) {
-                    Constants.pongVy *= -1;
-                }
-            }
+            //check collision with paddles
+            if (paddle[1].checkCollision(pong) || paddle[2].checkCollision(pong))
+                pong.vy *= -1;
         }
 
-        public void reset () {
-            pongX = 400;
-            pongY = 400;
-            paddle[1] = new Paddle (1);
-            paddle[2] = new Paddle (0);
+        public void reset()
+        {
+            paddle[1] = new Paddle(Constants.mapWidth / 2, Constants.mapHeight - 50);
+            paddle[2] = new Paddle(Constants.mapWidth / 2, 50);
+            pong = new Pong(Constants.mapWidth / 2, Constants.mapHeight / 2);
             time = 0;
         }
 

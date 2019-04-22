@@ -6,7 +6,8 @@ class GameScene extends Phaser.Scene {
     }
 
     preload() {
-        let src = '../assets/kitchen/';
+        let src = '../assets/' + theme + '/';
+        console.log(theme);
         this.load.image('background', src + 'background.png');
         this.load.image('ball', src + 'ball.png');
         this.load.image('bar', src + 'bar.png');
@@ -25,11 +26,11 @@ class GameScene extends Phaser.Scene {
             Constant.ORIGNAL_BALL_RADIUS * Constant.MAP_HEIGHT / Constant.ORIGINAL_HEIGHT);
         this.oppBar = this.add.image(300, 700, 'bar');
         this.oppBar.setDisplaySize(
-            Constant.ORIGINAL_PAD_WIDTH * Constant.MAP_WIDTH / Constant.ORIGINAL_WIDTH, 
+            Constant.ORIGINAL_PAD_WIDTH * Constant.MAP_WIDTH / Constant.ORIGINAL_WIDTH,
             Constant.ORIGINAL_PAD_HEIGHT * Constant.MAP_HEIGHT / Constant.ORIGINAL_HEIGHT);
         this.userBar = this.add.image(600, 70, 'bar');
         this.userBar.setDisplaySize(
-            Constant.ORIGINAL_PAD_WIDTH * Constant.MAP_WIDTH / Constant.ORIGINAL_WIDTH, 
+            Constant.ORIGINAL_PAD_WIDTH * Constant.MAP_WIDTH / Constant.ORIGINAL_WIDTH,
             Constant.ORIGINAL_PAD_HEIGHT * Constant.MAP_HEIGHT / Constant.ORIGINAL_HEIGHT);
     }
 
@@ -37,13 +38,13 @@ class GameScene extends Phaser.Scene {
         if (this.ball == null) return;
         this.ball.setDepth(10);
         this.ball.setPosition(
-            game.pongX * Constant.MAP_WIDTH / Constant.ORIGINAL_WIDTH, 
-            game.pongY * Constant.MAP_HEIGHT / Constant.ORIGINAL_HEIGHT);
+            game.pong.x * Constant.MAP_WIDTH / Constant.ORIGINAL_WIDTH,
+            game.pong.y * Constant.MAP_HEIGHT / Constant.ORIGINAL_HEIGHT);
         this.oppBar.setPosition(
-            game.paddle[1].x * Constant.MAP_WIDTH / Constant.ORIGINAL_WIDTH, 
+            game.paddle[1].x * Constant.MAP_WIDTH / Constant.ORIGINAL_WIDTH,
             game.paddle[1].y * Constant.MAP_HEIGHT / Constant.ORIGINAL_HEIGHT);
         this.userBar.setPosition(
-            game.paddle[2].x * Constant.MAP_WIDTH / Constant.ORIGINAL_WIDTH, 
+            game.paddle[2].x * Constant.MAP_WIDTH / Constant.ORIGINAL_WIDTH,
             game.paddle[2].y * Constant.MAP_HEIGHT / Constant.ORIGINAL_HEIGHT);
     }
 
@@ -70,7 +71,7 @@ class GameScene extends Phaser.Scene {
                 scaleY: 0.5,
                 duration: 700,
                 ease: 'Back.easeOut',
-                onComplete: function() {
+                onComplete: function () {
                     let instrucMessage = this.add.image(Constant.MAP_WIDTH / 2, Constant.MAP_HEIGHT / 2 + 100, 'msg');
                     instrucMessage.setScale(0.1, 0.1);
                     this.tweens.add({
