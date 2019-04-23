@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\Users\\TB\\Desktop\\class\\CSC210\\csc-210-final-project-group7\\FinalProject.csproj",
+  "FilePath": "/home/hekl0/CodeProject/FinalProject/FinalProject.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-2.1",
     "LanguageVersion": "2.1",
@@ -2759,58 +2759,58 @@
   "RootNamespace": "FinalProject",
   "Documents": [
     {
-      "FilePath": "Pages\\Login.cshtml",
-      "TargetPath": "Pages\\Login.cshtml",
+      "FilePath": "Pages/Login.cshtml",
+      "TargetPath": "Pages/Login.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Pages\\Index.cshtml",
-      "TargetPath": "Pages\\Index.cshtml",
+      "FilePath": "Pages/Privacy.cshtml",
+      "TargetPath": "Pages/Privacy.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Pages\\Privacy.cshtml",
-      "TargetPath": "Pages\\Privacy.cshtml",
+      "FilePath": "Pages/Test.cshtml",
+      "TargetPath": "Pages/Test.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Pages\\_ViewImports.cshtml",
-      "TargetPath": "Pages\\_ViewImports.cshtml",
+      "FilePath": "Pages/_ViewStart.cshtml",
+      "TargetPath": "Pages/_ViewStart.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Pages\\_ViewStart.cshtml",
-      "TargetPath": "Pages\\_ViewStart.cshtml",
+      "FilePath": "Pages/Shared/_Layout.cshtml",
+      "TargetPath": "Pages/Shared/_Layout.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Pages\\Shared\\_ValidationScriptsPartial.cshtml",
-      "TargetPath": "Pages\\Shared\\_ValidationScriptsPartial.cshtml",
+      "FilePath": "Pages/Index.cshtml",
+      "TargetPath": "Pages/Index.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Pages\\Game.cshtml",
-      "TargetPath": "Pages\\Game.cshtml",
+      "FilePath": "Pages/Shared/_CookieConsentPartial.cshtml",
+      "TargetPath": "Pages/Shared/_CookieConsentPartial.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Pages\\Error.cshtml",
-      "TargetPath": "Pages\\Error.cshtml",
+      "FilePath": "Pages/Shared/_ValidationScriptsPartial.cshtml",
+      "TargetPath": "Pages/Shared/_ValidationScriptsPartial.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Pages\\Shared\\_CookieConsentPartial.cshtml",
-      "TargetPath": "Pages\\Shared\\_CookieConsentPartial.cshtml",
+      "FilePath": "Pages/Error.cshtml",
+      "TargetPath": "Pages/Error.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Pages\\Shared\\_Layout.cshtml",
-      "TargetPath": "Pages\\Shared\\_Layout.cshtml",
+      "FilePath": "Pages/_ViewImports.cshtml",
+      "TargetPath": "Pages/_ViewImports.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Pages\\Test.cshtml",
-      "TargetPath": "Pages\\Test.cshtml",
+      "FilePath": "Pages/Game.cshtml",
+      "TargetPath": "Pages/Game.cshtml",
       "FileKind": "mvc"
     }
   ]

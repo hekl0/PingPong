@@ -14,8 +14,8 @@ namespace FinalProject.Controllers
         [HttpGet("api/Login/{room}/{password}/create")]
         public ActionResult CreateAccount(string room, string password)
         {
-            foreach (Game game in GameHub.games)
-                if (game.id == room)
+            foreach (User user in db.users)
+                if (user.id == room)
                     return BadRequest("user already exists");
 
             User newUser = new User();
@@ -31,18 +31,10 @@ namespace FinalProject.Controllers
         public ActionResult Login(string room, string password)
         {
             foreach (User user in db.users)
-            {
                 if (user.id == room && user.password == password)
-                {
                     return Ok();
-                }
-                else
-                {
-                    return BadRequest("either room or password is incorrect");
-                }
-            }
 
-            return BadRequest("Room doesn't exist");
+            return BadRequest("either room or password is incorrect");
         }
     }
 }

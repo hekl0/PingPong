@@ -17,7 +17,7 @@ $("#login-btn").click(function() {
             }
         }
     });
-    xhr.open("GET", ""); //link to api login
+    xhr.open("GET", "api/Login/" + username + "/" + password + "/login"); //link to api login
     xhr.send();
 });
 
@@ -35,6 +35,6 @@ $("#signup-btn").click(function() {
             }
         }
     });
-    xhr.open("GET", ""); //link to api signup
+    xhr.open("GET", "api/Login/" + username + "/" + password + "/create"); //link to api signup
     xhr.send();
 });
