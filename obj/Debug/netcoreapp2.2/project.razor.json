@@ -2759,11 +2759,6 @@
   "RootNamespace": "FinalProject",
   "Documents": [
     {
-      "FilePath": "Pages/Login.cshtml",
-      "TargetPath": "Pages/Login.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "Pages/Privacy.cshtml",
       "TargetPath": "Pages/Privacy.cshtml",
       "FileKind": "mvc"
