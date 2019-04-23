@@ -1,7 +1,9 @@
 using System;
 
-namespace FinalProject.Models {
-    public class Game {
+namespace FinalProject.Models
+{
+    public class Game
+    {
         public int numplayer, time;
         public int winner;
         public string id;
@@ -9,23 +11,27 @@ namespace FinalProject.Models {
         public Paddle[] paddle = new Paddle[3];
         public bool inGame, gameOver;
 
-        public Game () {
+        public Game()
+        {
             numplayer = 0;
             inGame = false;
             gameOver = false;
             reset();
         }
 
-        public void calculate () {
+        public void calculate()
+        {
             pong.move();
 
-            if (pong.y > Constants.mapHeight || pong.y < 0) {
+            if (pong.y > Constants.mapHeight || pong.y < 0)
+            {
                 gameOver = true;
-                if(pong.y > Constants.mapHeight) winner = 2;
+                if (pong.y > Constants.mapHeight) winner = 2;
                 else winner = 1;
             }
 
-            if (pong.x - pong.width <= 0 || pong.x + pong.width >= Constants.mapWidth) {
+            if (pong.x - pong.width <= 0 || pong.x + pong.width >= Constants.mapWidth)
+            {
                 pong.vx *= -1;
             }
 
@@ -34,7 +40,8 @@ namespace FinalProject.Models {
                 pong.vy *= -1;
         }
 
-        public void reset () {
+        public void reset()
+        {
             paddle[1] = new Paddle(Constants.mapWidth / 2, Constants.mapHeight - 50);
             paddle[2] = new Paddle(Constants.mapWidth / 2, 50);
             pong = new Pong(Constants.mapWidth / 2, Constants.mapHeight / 2);

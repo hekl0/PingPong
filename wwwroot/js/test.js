@@ -1,6 +1,6 @@
 let theme_choice = 1;
 
-$("#theme-kitchen").click(function() {
+$("#theme-kitchen").click(function () {
     if (theme_choice == 1) return;
     theme_choice = 1;
     $("#censor-kitchen").attr("hidden", true);
@@ -9,7 +9,7 @@ $("#theme-kitchen").click(function() {
     $("#theme-space").removeClass("choosed");
 });
 
-$("#theme-space").click(function() {
+$("#theme-space").click(function () {
     if (theme_choice == 2) return;
     theme_choice = 2;
     $("#censor-kitchen").removeAttr("hidden");
@@ -37,7 +37,7 @@ document.getElementById("join").addEventListener("click", function (event) {
         }
     });
     xhr.open("GET", "api/room/" + room + "/join");
-    xhr.send(data); 
+    xhr.send(data);
 });
 
 document.getElementById("create").addEventListener("click", function (event) {

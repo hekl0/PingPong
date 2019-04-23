@@ -12418,11 +12418,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\TB\\Desktop\\class\\CSC210\\csc-210-final-project-group7\\FinalProject.csproj",
+      "projectUniqueName": "C:\\Users\\TB\\Desktop\\class\\CSC210\\csc-210-final-project-group7\\FinalProject.csproj",
       "projectName": "FinalProject",
-      "projectPath": "c:\\Users\\TB\\Desktop\\class\\CSC210\\csc-210-final-project-group7\\FinalProject.csproj",
+      "projectPath": "C:\\Users\\TB\\Desktop\\class\\CSC210\\csc-210-final-project-group7\\FinalProject.csproj",
       "packagesPath": "C:\\Users\\TB\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\TB\\Desktop\\class\\CSC210\\csc-210-final-project-group7\\obj\\",
+      "outputPath": "C:\\Users\\TB\\Desktop\\class\\CSC210\\csc-210-final-project-group7\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

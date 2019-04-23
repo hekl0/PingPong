@@ -1,5 +1,7 @@
-namespace FinalProject.Models {
-    public static class Constants {
+namespace FinalProject.Models
+{
+    public static class Constants
+    {
         public static int mapWidth = 1000;
         public static int mapHeight = 800;
         public static int pongRadius = 20;
