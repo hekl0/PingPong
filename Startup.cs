@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.SignalR;
-using UI.Models;
+using FinalProject.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject
